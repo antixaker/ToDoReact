@@ -1,9 +1,12 @@
 ﻿using NUnit.Framework;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using ToDoReact.Services;
+using ToDoReact.Models;
+
 namespace ToDoReact.Tests
 {
-    [TestFixture()]
+    [TestFixture]
     public class TODOServiceTests
     {
         [Test]
