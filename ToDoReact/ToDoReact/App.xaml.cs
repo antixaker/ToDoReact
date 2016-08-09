@@ -8,7 +8,7 @@ namespace ToDoReact
         {
             InitializeComponent();
 
-            MainPage = new ToDoReactPage();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()
