@@ -45,7 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test.cs" />
+    <Compile Include="TODOServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
