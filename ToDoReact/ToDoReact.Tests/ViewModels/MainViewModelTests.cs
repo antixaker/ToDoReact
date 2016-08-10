@@ -77,7 +77,7 @@ namespace ToDoReact.Tests
         }
 
         [Test]
-        public void Items_ItemContainsDateTitleDescription_True()
+        public void Item_ItemContainsDateTitleDescription_True()
         {
             // Arrange
             var date = DateTime.Now;
@@ -89,6 +89,20 @@ namespace ToDoReact.Tests
             Assert.AreEqual(date, item.Date);
             Assert.AreEqual(title, item.Title);
             Assert.AreEqual(description, item.Description);
+        }
+
+        [Test]
+        public void Item_CanCreateItemWithoutDescription_Success()
+        {
+            // Arrange
+            var date = DateTime.Now;
+            var title = "StudyTDD";
+            // Act
+            var item = new TODOModel(date, title);
+            // Assert
+            Assert.AreEqual(date, item.Date);
+            Assert.AreEqual(title, item.Title);
+
         }
     }
 }
