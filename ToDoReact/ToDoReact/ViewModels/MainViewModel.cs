@@ -15,17 +15,19 @@ namespace ToDoReact
         public MainViewModel(ITODOService todoService)
         {
             _todoService = todoService;
+            ItemsAreEmpty = Items
+                .Select(list => !list.Any())
+                .ToReadOnlyReactiveProperty();
         }
 
         public override void Init()
         {
             Items.Value = _todoService.GetAll();
-            ItemsAreEmpty = Items.Any().ToReactiveProperty();
         }
 
-        public ReactiveProperty<List<TODOModel>> Items { get; } = new ReactiveProperty<List<TODOModel>>();
+        public ReactiveProperty<List<TODOModel>> Items { get; } = new ReactiveProperty<List<TODOModel>>(new List<TODOModel>());
 
-        public ReactiveProperty<bool> ItemsAreEmpty { get; private set; }
+        public ReadOnlyReactiveProperty<bool> ItemsAreEmpty { get; }
     }
 }
 

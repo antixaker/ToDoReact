@@ -37,7 +37,6 @@ namespace ToDoReact.Tests
             var collection = new List<TODOModel> { _testModel, _testModel };
             _mockTODOService.Setup(x => x.GetAll()).Returns(collection);
             _mainViewModel.Init();
-            //var vm = new MainViewModel(_mockTODOService.Object);
 
             // Act
             // Assert
@@ -45,13 +44,23 @@ namespace ToDoReact.Tests
         }
 
         [Test]
-        public void ItemsAreEmpty_PropertySetTrueWhenItemsCountZero_True()
+        public void ItemsAreEmpty_ItemsCountZero_PropertySetTrue()
         {
             // Arrange
             _mainViewModel.Init();
             // Act
             // Assert
             Assert.IsTrue(_mainViewModel.ItemsAreEmpty.Value);
+        }
+
+        [Test]
+        public void ItemsAreEmpty_PropertyFalseAfterAddingToList_True()
+        {
+            // Arrange
+            _mainViewModel.Init();
+            // Act
+            // Assert
+            Assert.IsFalse(_mainViewModel.ItemsAreEmpty.Value);
         }
     }
 }
