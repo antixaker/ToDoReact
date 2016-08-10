@@ -3,7 +3,7 @@ namespace ToDoReact.Models
 {
     public class TODOModel
     {
-        public TODOModel(DateTime date, string title) : this(date, title, string.Empty)
+        public TODOModel(DateTime date, string title) : this(date, title, "Empty")
         {
 
         }

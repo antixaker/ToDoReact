@@ -82,7 +82,7 @@ namespace ToDoReact.Tests
             // Arrange
             var date = DateTime.Now;
             var title = "StudyTDD";
-            var description = "TDD very interesting and usefull thing.";
+            var description = "TDD is very interesting and usefull thing.";
             // Act
             var item = new TODOModel(date, title, description);
             // Assert
@@ -102,7 +102,7 @@ namespace ToDoReact.Tests
             // Assert
             Assert.AreEqual(date, item.Date);
             Assert.AreEqual(title, item.Title);
-
+            Assert.AreEqual("Empty", item.Description);
         }
     }
 }
