@@ -38,6 +38,16 @@ namespace ToDoReact.Tests
             // Assert
             Assert.AreEqual(new List<TODOModel>() { _testModel, _testModel }, _mainViewModel.Items.Value);
         }
+
+        [Test]
+        public void ItemsAreEmpty_PropertySetTrueWhenItemsCountZero_True()
+        {
+            // Arrange
+            // Act
+            _mainViewModel.Items.Value.Clear();
+            // Assert
+            Assert.IsTrue(_mainViewModel.ItemsAreEmpty);
+        }
     }
 }
 
