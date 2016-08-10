@@ -18,6 +18,11 @@ namespace ToDoReact.Tests
 
         private ITODOService _todoService;
 
+        private TODOModel GetTODOInstance()
+        {
+            return new TODOModel(DateTime.Now, string.Empty, string.Empty);
+        }
+
         [Test]
         public void GetAll_GotEmptyList_Success()
         {
@@ -33,7 +38,7 @@ namespace ToDoReact.Tests
         {
             // Arrange
             // Act
-            _todoService.Add(new TODOModel());
+            _todoService.Add(GetTODOInstance());
             // Assert
             Assert.IsTrue(_todoService.GetAll().Any());
         }
@@ -42,7 +47,7 @@ namespace ToDoReact.Tests
         public void DeleteItem_DeleteExistTODOFromList_ListDoesntContainItem()
         {
             // Arrange
-            var todoItem = new TODOModel();
+            var todoItem = GetTODOInstance();
             _todoService.Add(todoItem);
             // Act
             _todoService.DeleteItem(todoItem);
@@ -54,7 +59,7 @@ namespace ToDoReact.Tests
         public void DeleteItem_TryDeleteNotExistItem_Success()
         {
             // Arrange
-            var item = new TODOModel();
+            var item = GetTODOInstance();
             // Act
             try
             {

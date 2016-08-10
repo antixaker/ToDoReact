@@ -17,7 +17,7 @@ namespace ToDoReact.Tests
             _mainViewModel = new MainViewModel(_mockTODOService.Object);
         }
 
-        private TODOModel _testModel = new TODOModel();
+        private TODOModel _testModel = new TODOModel(DateTime.Now, string.Empty, string.Empty);
         private MainViewModel _mainViewModel;
         private Mock<ITODOService> _mockTODOService;
 
@@ -80,15 +80,15 @@ namespace ToDoReact.Tests
         public void Items_ItemContainsDateTitleDescription_True()
         {
             // Arrange
-            var time = DateTime.Now;
+            var date = DateTime.Now;
             var title = "StudyTDD";
             var description = "TDD very interesting and usefull thing.";
             // Act
-            var item = new TODOModel(time, title, description);
+            var item = new TODOModel(date, title, description);
             // Assert
-            Assert.AreSame(time, item.Time);
-            Assert.AreSame(title, item.Title);
-            Assert.AreSame(description, item.Description);
+            Assert.AreEqual(date, item.Date);
+            Assert.AreEqual(title, item.Title);
+            Assert.AreEqual(description, item.Description);
         }
     }
 }
