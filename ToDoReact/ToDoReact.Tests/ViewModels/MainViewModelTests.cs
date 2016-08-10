@@ -75,6 +75,21 @@ namespace ToDoReact.Tests
             // Assert
             Assert.IsFalse(_mainViewModel.ItemsAreEmpty.Value);
         }
+
+        [Test]
+        public void Items_ItemContainsDateTitleDescription_True()
+        {
+            // Arrange
+            var time = DateTime.Now;
+            var title = "StudyTDD";
+            var description = "TDD very interesting and usefull thing.";
+            // Act
+            var item = new TODOModel(time, title, description);
+            // Assert
+            Assert.AreSame(time, item.Time);
+            Assert.AreSame(title, item.Title);
+            Assert.AreSame(description, item.Description);
+        }
     }
 }
 
