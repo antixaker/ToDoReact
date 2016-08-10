@@ -4,6 +4,7 @@ using Moq;
 using ToDoReact.Services;
 using ToDoReact.Models;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ToDoReact.Tests
 {
@@ -13,18 +14,33 @@ namespace ToDoReact.Tests
         [SetUp]
         public void SetUp()
         {
+            _mockTODOService = new Mock<ITODOService>();
             _mainViewModel = new MainViewModel(_mockTODOService.Object);
         }
 
         private TODOModel _testModel = new TODOModel();
         private MainViewModel _mainViewModel;
-        private Mock<ITODOService> _mockTODOService = new Mock<ITODOService>();
+        private Mock<ITODOService> _mockTODOService;
+
+        private void ArrangeTestWithEmptyList()
+        {
+            _mockTODOService.Setup(x => x.GetAll()).Returns(new List<TODOModel>());
+            _mainViewModel.Init();
+        }
+
+        private List<TODOModel> ArrangeTestWithNotEmptyList()
+        {
+            var collection = new List<TODOModel> { _testModel, _testModel };
+            _mockTODOService.Setup(x => x.GetAll()).Returns(collection);
+            _mainViewModel.Init();
+            return collection;
+        }
 
         [Test]
         public void MainViewModel_HaveNotNullListAfterCreation_True()
         {
             // Arrange
-            _mainViewModel.Init();
+            ArrangeTestWithEmptyList();
             // Act
             // Assert
             Assert.IsNotNull(_mainViewModel.Items);
@@ -34,9 +50,7 @@ namespace ToDoReact.Tests
         public void Items_ValuesAsInTodoServiceGetAll_True()
         {
             // Arrange
-            var collection = new List<TODOModel> { _testModel, _testModel };
-            _mockTODOService.Setup(x => x.GetAll()).Returns(collection);
-            _mainViewModel.Init();
+            List<TODOModel> collection = ArrangeTestWithNotEmptyList();
 
             // Act
             // Assert
@@ -47,7 +61,7 @@ namespace ToDoReact.Tests
         public void ItemsAreEmpty_ItemsCountZero_PropertySetTrue()
         {
             // Arrange
-            _mainViewModel.Init();
+            ArrangeTestWithEmptyList();
             // Act
             // Assert
             Assert.IsTrue(_mainViewModel.ItemsAreEmpty.Value);
@@ -57,7 +71,7 @@ namespace ToDoReact.Tests
         public void ItemsAreEmpty_PropertyFalseAfterAddingToList_True()
         {
             // Arrange
-            _mainViewModel.Init();
+            ArrangeTestWithNotEmptyList();
             // Act
             // Assert
             Assert.IsFalse(_mainViewModel.ItemsAreEmpty.Value);

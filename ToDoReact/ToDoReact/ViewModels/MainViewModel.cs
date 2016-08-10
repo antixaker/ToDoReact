@@ -5,6 +5,7 @@ using ToDoReact.Models;
 using Reactive.Bindings;
 using System.Reactive.Linq;
 using System.Linq;
+using System.Diagnostics;
 
 namespace ToDoReact
 {
@@ -17,7 +18,7 @@ namespace ToDoReact
             _todoService = todoService;
             ItemsAreEmpty = Items
                 .Select(list => !list.Any())
-                .ToReadOnlyReactiveProperty();
+                .ToReactiveProperty();
         }
 
         public override void Init()
@@ -27,7 +28,7 @@ namespace ToDoReact
 
         public ReactiveProperty<List<TODOModel>> Items { get; } = new ReactiveProperty<List<TODOModel>>(new List<TODOModel>());
 
-        public ReadOnlyReactiveProperty<bool> ItemsAreEmpty { get; }
+        public ReactiveProperty<bool> ItemsAreEmpty { get; }
     }
 }
 
