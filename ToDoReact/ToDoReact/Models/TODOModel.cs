@@ -10,11 +10,11 @@ namespace ToDoReact.Models
             Description = description;
         }
 
-        public DateTime Date { get; set; }
+        public DateTime Date { get; }
 
-        public string Title { get; set; }
+        public string Title { get; }
 
-        public string Description { get; set; }
+        public string Description { get; }
     }
 }
 
