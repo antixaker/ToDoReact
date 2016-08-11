@@ -75,35 +75,6 @@ namespace ToDoReact.Tests
             // Assert
             Assert.IsFalse(_mainViewModel.ItemsAreEmpty.Value);
         }
-
-        [Test]
-        public void Item_ItemContainsDateTitleDescription_True()
-        {
-            // Arrange
-            var date = DateTime.Now;
-            var title = "StudyTDD";
-            var description = "TDD is very interesting and usefull thing.";
-            // Act
-            var item = new TODOModel(date, title, description);
-            // Assert
-            Assert.AreEqual(date, item.Date);
-            Assert.AreEqual(title, item.Title);
-            Assert.AreEqual(description, item.Description);
-        }
-
-        [Test]
-        public void Item_CanCreateItemWithoutDescription_Success()
-        {
-            // Arrange
-            var date = DateTime.Now;
-            var title = "StudyTDD";
-            // Act
-            var item = new TODOModel(date, title);
-            // Assert
-            Assert.AreEqual(date, item.Date);
-            Assert.AreEqual(title, item.Title);
-            Assert.AreEqual("Empty", item.Description);
-        }
     }
 }
 

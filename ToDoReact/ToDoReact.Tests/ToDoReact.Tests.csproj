@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Services\TODOServiceTests.cs" />
     <Compile Include="ViewModels\MainViewModelTests.cs" />
+    <Compile Include="TODOModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
