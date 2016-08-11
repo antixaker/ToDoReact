@@ -4,6 +4,7 @@ using Moq;
 using ToDoReact.Services;
 using ToDoReact.Models;
 using System.Collections.Generic;
+using FreshMvvm;
 
 namespace ToDoReact.Tests
 {
@@ -20,6 +21,7 @@ namespace ToDoReact.Tests
         private TODOModel _testModel = new TODOModel(DateTime.Now, string.Empty, string.Empty);
         private MainViewModel _mainViewModel;
         private Mock<ITODOService> _mockTODOService;
+        private Mock<IPageModelCoreMethods> _coreMethods;
 
         private void ArrangeTestWithEmptyList()
         {
@@ -74,6 +76,18 @@ namespace ToDoReact.Tests
             // Act
             // Assert
             Assert.IsFalse(_mainViewModel.ItemsAreEmpty.Value);
+        }
+
+        [Test]
+        public void AddTODOCommand_RedirectToTargetView_Success()
+        {
+            // Arrange
+            _coreMethods = new Mock<IPageModelCoreMethods>();
+            _mainViewModel.AddTODOCommand.Execute();
+            // Act
+
+            // Assert
+            _coreMethods.Verify(x => x.PushPageModel<AddTodoViewModel>(true), Times.Once());
         }
     }
 }
