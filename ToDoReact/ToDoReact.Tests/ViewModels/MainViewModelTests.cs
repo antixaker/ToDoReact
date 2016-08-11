@@ -5,6 +5,7 @@ using ToDoReact.Services;
 using ToDoReact.Models;
 using System.Collections.Generic;
 using FreshMvvm;
+using ViewModels;
 
 namespace ToDoReact.Tests
 {
@@ -35,6 +36,12 @@ namespace ToDoReact.Tests
             _mockTODOService.Setup(x => x.GetAll()).Returns(collection);
             _mainViewModel.Init();
             return collection;
+        }
+
+        private void SetMockedCoreMethodsToViewModel()
+        {
+            _coreMethods = new Mock<IPageModelCoreMethods>();
+            _mainViewModel.CoreMethods = _coreMethods.Object;
         }
 
         [Test]
@@ -82,12 +89,22 @@ namespace ToDoReact.Tests
         public void AddTODOCommand_RedirectToTargetView_Success()
         {
             // Arrange
-            _coreMethods = new Mock<IPageModelCoreMethods>();
-            _mainViewModel.AddTODOCommand.Execute();
+            SetMockedCoreMethodsToViewModel();
             // Act
-
+            _mainViewModel.AddTODOCommand.Execute();
             // Assert
-            _coreMethods.Verify(x => x.PushPageModel<AddTodoViewModel>(true), Times.Once());
+            _coreMethods.Verify(x => x.PushPageModel<AddTODOViewModel>(true), Times.Once());
+        }
+
+        [Test]
+        public void EditTODOCommand_RedirectToTargetView_Success()
+        {
+            // Arrange
+            SetMockedCoreMethodsToViewModel();
+            // Act
+            _mainViewModel.EditTODOCommand.Execute();
+            // Assert
+            _coreMethods.Verify(x => x.PushPageModel<EditTODOViewModel>(true), Times.Once());
         }
     }
 }
