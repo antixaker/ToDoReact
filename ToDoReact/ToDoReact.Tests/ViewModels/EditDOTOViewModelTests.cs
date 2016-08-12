@@ -71,6 +71,16 @@ namespace ViewModels
             // Assert
             _todoService.Verify(x => x.DeleteItem(_model), Times.Once());
         }
+
+        [Test]
+        public void DeleteItemCommand_InvokesOnce_True()
+        {
+            // Arrange
+            // Act
+            _editVM.DeleteItemCommand.Execute();
+            // Assert
+            _todoService.Verify(x => x.DeleteItem(_model), Times.Once());
+        }
     }
 }
 
