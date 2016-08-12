@@ -50,6 +50,8 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\AddTODOViewModel.cs" />
     <Compile Include="ViewModels\EditTODOViewModel.cs" />
+    <Compile Include="Services\ITimeProvider.cs" />
+    <Compile Include="Services\TimeProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

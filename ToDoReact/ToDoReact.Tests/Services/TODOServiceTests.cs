@@ -37,10 +37,11 @@ namespace ToDoReact.Tests
         public void Add_AddTODOItem_ListNotEmptyAfterAdd()
         {
             // Arrange
+            var todoItem = GetTODOInstance();
             // Act
-            _todoService.Add(GetTODOInstance());
+            _todoService.Add(todoItem);
             // Assert
-            Assert.IsTrue(_todoService.GetAll().Any());
+            Assert.IsTrue(_todoService.GetAll().Contains(todoItem));
         }
 
         [Test]

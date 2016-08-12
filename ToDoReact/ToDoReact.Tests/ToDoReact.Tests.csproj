@@ -88,6 +88,8 @@
     <Compile Include="Services\TODOServiceTests.cs" />
     <Compile Include="ViewModels\MainViewModelTests.cs" />
     <Compile Include="TODOModelTests.cs" />
+    <Compile Include="ViewModels\AddTODOViewModelTests.cs" />
+    <Compile Include="Services\TimeProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
