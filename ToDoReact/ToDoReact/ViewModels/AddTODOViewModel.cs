@@ -3,10 +3,8 @@ using ToDoReact;
 using ToDoReact.Services;
 using Reactive.Bindings;
 using ToDoReact.Models;
-using Services;
-using System.Reactive.Subjects;
-using System.Reflection;
 using System.Reactive.Linq;
+
 namespace ViewModels
 {
     public class AddTODOViewModel : BaseViewModel

@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Services
+
+namespace ToDoReact.Services
 {
     public class TimeProvider : ITimeProvider
     {
