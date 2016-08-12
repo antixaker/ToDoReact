@@ -12,7 +12,7 @@ namespace ToDoReact.Models
         {
             Date = date;
             Title = title;
-            Description = description;
+            Description = string.IsNullOrWhiteSpace(description) ? "Empty" : description;
         }
 
         public DateTime Date { get; }

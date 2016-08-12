@@ -36,6 +36,36 @@ namespace ToDoReact.Tests
             Assert.AreEqual("Empty", item.Description);
         }
 
+        [Test]
+        public void TODOModel_LeftDecsriptionEmpty_ItemHasDefaultDescription()
+        {
+            // Arrange
+            var date = DateTime.Now;
+            var title = "StudyTDD";
+            var description = string.Empty;
+            // Act
+            var item = new TODOModel(date, title, description);
+            // Assert
+            Assert.AreEqual(date, item.Date);
+            Assert.AreEqual(title, item.Title);
+            Assert.AreEqual("Empty", item.Description);
+        }
+
+        [Test]
+        public void TODOModel_AddToDescriptionWhiteSpaces_ItemHasDefaultDescription()
+        {
+            // Arrange
+            var date = DateTime.Now;
+            var title = "StudyTDD";
+            var description = "  ";
+            // Act
+            var item = new TODOModel(date, title, description);
+            // Assert
+            Assert.AreEqual(date, item.Date);
+            Assert.AreEqual(title, item.Title);
+            Assert.AreEqual("Empty", item.Description);
+        }
+
     }
 }
 
