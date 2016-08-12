@@ -5,6 +5,8 @@ using ToDoReact.Services;
 using ToDoReact.Models;
 using System.Collections.Generic;
 using System.Linq;
+using FreshMvvm;
+using System.Threading.Tasks;
 
 namespace ViewModels
 {
@@ -73,14 +75,46 @@ namespace ViewModels
         }
 
         [Test]
-        public void DeleteItemCommand_InvokesOnce_True()
+        public void DeleteItemCommand_PromptWasShowed_True()
         {
             // Arrange
+            var coreMethods = new Mock<IPageModelCoreMethods>();
+            _editVM.CoreMethods = coreMethods.Object;
+            // Act
+            _editVM.DeleteItemCommand.Execute();
+            // Assert
+            coreMethods.Verify(x => x.DisplayAlert(string.Empty, "Are you sure?", "Yes", "No"), Times.Once());
+        }
+
+        [Test]
+        public void DeleteItemCommand_AcceptDeletion_ItemDeleted()
+        {
+            // Arrange
+            var coreMethods = new Mock<IPageModelCoreMethods>();
+            coreMethods.Setup(x => x.DisplayAlert(string.Empty, "Are you sure?", "Yes", "No")).Returns(Task.FromResult(true));
+            _editVM.CoreMethods = coreMethods.Object;
+
             // Act
             _editVM.DeleteItemCommand.Execute();
             // Assert
             _todoService.Verify(x => x.DeleteItem(_model), Times.Once());
         }
+
+        [Test]
+        public void DeleteItemCommand_DeclineDeletion_ItemNotDeleted()
+        {
+            // Arrange
+            var coreMethods = new Mock<IPageModelCoreMethods>();
+            coreMethods.Setup(x => x.DisplayAlert(string.Empty, "Are you sure?", "Yes", "No")).Returns(Task.FromResult(false));
+            _editVM.CoreMethods = coreMethods.Object;
+
+            // Act
+            _editVM.DeleteItemCommand.Execute();
+            // Assert
+            _todoService.Verify(x => x.DeleteItem(_model), Times.Never());
+        }
+
+
     }
 }
 

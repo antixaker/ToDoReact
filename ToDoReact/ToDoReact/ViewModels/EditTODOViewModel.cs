@@ -10,6 +10,7 @@ namespace ViewModels
     public class EditTODOViewModel : BaseViewModel
     {
         private IDisposable _saveCommandSubscription;
+        private IDisposable _deleteCommandSubscription;
 
         public EditTODOViewModel(ITODOService todoService, TODOModel model)
         {
@@ -20,6 +21,7 @@ namespace ViewModels
             _commandCanExecute = Title.Select((arg) => !string.IsNullOrEmpty(arg));
 
             SaveChangesCommand = new ReactiveCommand(_commandCanExecute);
+
             _saveCommandSubscription = SaveChangesCommand.Subscribe((_) =>
             {
                 if (Completed.Value)
@@ -30,6 +32,15 @@ namespace ViewModels
                 {
                     model.Description = Description.Value;
                     model.Title = Title.Value;
+                }
+            });
+
+            _deleteCommandSubscription = DeleteItemCommand.Subscribe(async (_) =>
+            {
+                var areYouSure = await CoreMethods.DisplayAlert(string.Empty, "Are you sure?", "Yes", "No");
+                if (areYouSure)
+                {
+                    todoService.DeleteItem(model);
                 }
             });
         }
@@ -44,9 +55,12 @@ namespace ViewModels
 
         public ReactiveCommand SaveChangesCommand { get; }
 
+        public ReactiveCommand DeleteItemCommand { get; } = new ReactiveCommand();
+
         ~EditTODOViewModel()
         {
             _saveCommandSubscription.Dispose();
+            _deleteCommandSubscription.Dispose();
         }
     }
 }
