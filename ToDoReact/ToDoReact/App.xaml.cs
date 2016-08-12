@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using FreshMvvm;
+using Xamarin.Forms;
+using ToDoReact.Services;
 
 namespace ToDoReact
 {
@@ -8,7 +10,11 @@ namespace ToDoReact
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            RegisterServices();
+
+            var page = FreshPageModelResolver.ResolvePageModel<MainViewModel>();
+            var basicNavContainer = new FreshNavigationContainer(page);
+            MainPage = basicNavContainer;
         }
 
         protected override void OnStart()
@@ -24,6 +30,12 @@ namespace ToDoReact
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        private void RegisterServices()
+        {
+            FreshIOC.Container.Register<ITODOService, TODOService>();
+            FreshIOC.Container.Register<ITimeProvider, TimeProvider>();
         }
     }
 }

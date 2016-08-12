@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:BaseContentPage Title="Add ToDo page" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pages.AddTODOPage" xmlns:pages="clr-namespace:Pages;assembly=ToDoReact">
+	<StackLayout Orientation="Vertical" Padding="5">
+		<Label Text="Title" />
+		<Entry Text="{Binding Title.Value}" />
+		<BoxView HeightRequest="7" />
+		<Label Text="Description" />
+		<Entry Text="{Binding Description.Value}" />
+		<Button Command="{Binding AddItemCommand}" Text="Add item" TextColor="Navy" BackgroundColor="Silver" />
+	</StackLayout>
+</pages:BaseContentPage>
