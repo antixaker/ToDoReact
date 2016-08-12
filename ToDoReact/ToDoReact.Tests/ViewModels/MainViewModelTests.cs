@@ -101,10 +101,11 @@ namespace ToDoReact.Tests
         {
             // Arrange
             SetMockedCoreMethodsToViewModel();
+            var fakeModel = It.IsAny<TODOModel>();
             // Act
             _mainViewModel.EditTODOCommand.Execute();
             // Assert
-            _coreMethods.Verify(x => x.PushPageModel<EditTODOViewModel>(true), Times.Once());
+            _coreMethods.Verify(x => x.PushPageModel<EditTODOViewModel>(fakeModel, false, true), Times.Once());
         }
     }
 }

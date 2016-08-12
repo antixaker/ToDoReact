@@ -21,7 +21,8 @@ namespace ViewModels
             _model = new TODOModel(date, title);
             _todoService = new Mock<ITODOService>();
 
-            _editVM = new EditTODOViewModel(_todoService.Object, _model);
+            _editVM = new EditTODOViewModel(_todoService.Object);
+            _editVM.Init(_model);
         }
 
         private Mock<ITODOService> _todoService;

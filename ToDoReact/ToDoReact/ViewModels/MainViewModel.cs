@@ -23,7 +23,7 @@ namespace ToDoReact
                 .Select(list => !list.Any())
                 .ToReadOnlyReactiveProperty();
             _addCommandSubscription = AddTODOCommand.Subscribe((_) => CoreMethods.PushPageModel<AddTODOViewModel>(true));
-            _editCommandSubscription = EditTODOCommand.Subscribe((_) => CoreMethods.PushPageModel<EditTODOViewModel>(true));
+            _editCommandSubscription = EditTODOCommand.Subscribe((item) => CoreMethods.PushPageModel<EditTODOViewModel>(item, false, true));
         }
 
         public override void Init()

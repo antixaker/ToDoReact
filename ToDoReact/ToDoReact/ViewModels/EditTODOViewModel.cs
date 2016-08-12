@@ -11,13 +11,10 @@ namespace ViewModels
     {
         private IDisposable _saveCommandSubscription;
         private IDisposable _deleteCommandSubscription;
+        private TODOModel _model;
 
-        public EditTODOViewModel(ITODOService todoService, TODOModel model)
+        public EditTODOViewModel(ITODOService todoService)
         {
-            CreationDate.Value = model.Date;
-            Title.Value = model.Title;
-            Description.Value = model.Description;
-
             _commandCanExecute = Title.Select((arg) => !string.IsNullOrEmpty(arg));
 
             SaveChangesCommand = new ReactiveCommand(_commandCanExecute);
@@ -26,12 +23,12 @@ namespace ViewModels
             {
                 if (Completed.Value)
                 {
-                    todoService.DeleteItem(model);
+                    todoService.DeleteItem(_model);
                 }
                 else
                 {
-                    model.Description = Description.Value;
-                    model.Title = Title.Value;
+                    _model.Description = Description.Value;
+                    _model.Title = Title.Value;
                 }
             });
 
@@ -40,9 +37,25 @@ namespace ViewModels
                 var areYouSure = await CoreMethods.DisplayAlert(string.Empty, "Are you sure?", "Yes", "No");
                 if (areYouSure)
                 {
-                    todoService.DeleteItem(model);
+                    todoService.DeleteItem(_model);
                 }
             });
+
+        }
+
+        public override void Init(object initData)
+        {
+            base.Init(initData);
+            var model = initData as TODOModel;
+            if (model == null)
+            {
+                return;
+            }
+            _model = model;
+
+            CreationDate.Value = model.Date;
+            Title.Value = model.Title;
+            Description.Value = model.Description;
         }
 
         public ReactiveProperty<bool> Completed { get; } = new ReactiveProperty<bool>();
