@@ -17,9 +17,9 @@ namespace ToDoReact.Models
 
         public DateTime Date { get; }
 
-        public string Title { get; }
+        public string Title { get; set; }
 
-        public string Description { get; }
+        public string Description { get; set; }
     }
 }
 

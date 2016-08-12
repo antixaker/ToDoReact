@@ -11,7 +11,6 @@ namespace ViewModels
     {
         private ITODOService _todoService;
         private ITimeProvider _timeProvider;
-        private IObservable<bool> _commandCanExecute;
 
         public AddTODOViewModel(ITODOService todoService, ITimeProvider timeService)
         {

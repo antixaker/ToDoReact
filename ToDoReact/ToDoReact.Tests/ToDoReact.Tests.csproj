@@ -90,6 +90,7 @@
     <Compile Include="TODOModelTests.cs" />
     <Compile Include="ViewModels\AddTODOViewModelTests.cs" />
     <Compile Include="Services\TimeProviderTests.cs" />
+    <Compile Include="ViewModels\EditDOTOViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

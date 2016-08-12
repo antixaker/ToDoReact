@@ -7,6 +7,8 @@ namespace ToDoReact
     {
         public virtual void Init() { }
 
+        protected IObservable<bool> _commandCanExecute;
+
         public virtual IReactiveCommand LoadingCommand { get; }
     }
 }

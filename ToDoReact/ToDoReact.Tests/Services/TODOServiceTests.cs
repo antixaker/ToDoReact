@@ -34,7 +34,7 @@ namespace ToDoReact.Tests
         }
 
         [Test]
-        public void Add_AddTODOItem_ListNotEmptyAfterAdd()
+        public void Add_AddTODOItem_ListContainsAddedItem()
         {
             // Arrange
             var todoItem = GetTODOInstance();
@@ -57,7 +57,7 @@ namespace ToDoReact.Tests
         }
 
         [Test]
-        public void DeleteItem_TryDeleteNotExistItem_Success()
+        public void DeleteItem_TryDeleteNotExistItem_NoException()
         {
             // Arrange
             var item = GetTODOInstance();
