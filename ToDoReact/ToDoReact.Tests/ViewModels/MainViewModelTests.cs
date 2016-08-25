@@ -6,6 +6,7 @@ using ToDoReact.Models;
 using System.Collections.Generic;
 using FreshMvvm;
 using ViewModels;
+using System.Collections.ObjectModel;
 
 namespace ToDoReact.Tests
 {
@@ -26,13 +27,13 @@ namespace ToDoReact.Tests
 
         private void ArrangeTestWithEmptyList()
         {
-            _mockTODOService.Setup(x => x.GetAll()).Returns(new List<TODOModel>());
+            _mockTODOService.Setup(x => x.GetAll()).Returns(new ObservableCollection<TODOModel>());
             _mainViewModel.Init();
         }
 
-        private List<TODOModel> ArrangeTestWithNotEmptyList()
+        private ObservableCollection<TODOModel> ArrangeTestWithNotEmptyList()
         {
-            var collection = new List<TODOModel> { _testModel, _testModel };
+            var collection = new ObservableCollection<TODOModel> { _testModel, _testModel };
             _mockTODOService.Setup(x => x.GetAll()).Returns(collection);
             _mainViewModel.Init();
             return collection;
@@ -58,7 +59,7 @@ namespace ToDoReact.Tests
         public void Items_ValuesAsInTodoServiceGetAll_True()
         {
             // Arrange
-            List<TODOModel> collection = ArrangeTestWithNotEmptyList();
+            var collection = ArrangeTestWithNotEmptyList();
 
             // Act
             // Assert

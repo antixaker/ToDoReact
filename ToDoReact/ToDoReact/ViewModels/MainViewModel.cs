@@ -7,6 +7,7 @@ using System.Reactive.Linq;
 using System.Linq;
 using FreshMvvm;
 using ViewModels;
+using System.Collections.ObjectModel;
 
 namespace ToDoReact
 {
@@ -31,7 +32,7 @@ namespace ToDoReact
             Items.Value = _todoService.GetAll();
         }
 
-        public ReactiveProperty<List<TODOModel>> Items { get; } = new ReactiveProperty<List<TODOModel>>(new List<TODOModel>());
+        public ReactiveProperty<ObservableCollection<TODOModel>> Items { get; } = new ReactiveProperty<ObservableCollection<TODOModel>>(new ObservableCollection<TODOModel>());
 
         public ReadOnlyReactiveProperty<bool> ItemsAreEmpty { get; }
 

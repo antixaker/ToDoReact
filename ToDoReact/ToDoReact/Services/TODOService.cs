@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using ToDoReact.Models;
+using System.Collections.ObjectModel;
 
 namespace ToDoReact.Services
 {
     public class TODOService : ITODOService
     {
-        private List<TODOModel> _todoList = new List<TODOModel>();
+        private ObservableCollection<TODOModel> _todoList = new ObservableCollection<TODOModel>();
 
         public void Add(TODOModel item)
         {
@@ -18,7 +19,7 @@ namespace ToDoReact.Services
             _todoList.Remove(item);
         }
 
-        public List<TODOModel> GetAll()
+        public ObservableCollection<TODOModel> GetAll()
         {
             return _todoList;
         }

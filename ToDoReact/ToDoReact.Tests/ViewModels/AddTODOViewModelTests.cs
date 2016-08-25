@@ -5,6 +5,7 @@ using ToDoReact.Services;
 using ToDoReact.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace ViewModels
 {
@@ -56,7 +57,7 @@ namespace ViewModels
 
             var model = new TODOModel(date, title, description);
             _mockTimeProvider.Setup(t => t.CurrentTime).Returns(date);
-            _mockTodoService.Setup(x => x.GetAll()).Returns(new List<TODOModel>() { model });
+            _mockTodoService.Setup(x => x.GetAll()).Returns(new ObservableCollection<TODOModel>() { model });
 
             _addTodoViewModel.Title.Value = title;
             _addTodoViewModel.Description.Value = description;
@@ -77,7 +78,7 @@ namespace ViewModels
 
             var model = new TODOModel(date, title);
             _mockTimeProvider.Setup(t => t.CurrentTime).Returns(date);
-            _mockTodoService.Setup(x => x.GetAll()).Returns(new List<TODOModel>() { model });
+            _mockTodoService.Setup(x => x.GetAll()).Returns(new ObservableCollection<TODOModel>() { model });
 
             _addTodoViewModel.Title.Value = title;
 

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FreshMvvm;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace ViewModels
 {
@@ -44,7 +45,7 @@ namespace ViewModels
         public void SaveChangesCommand_ItemChangesSavedToService_True()
         {
             // Arrange
-            _todoService.Setup(x => x.GetAll()).Returns(new List<TODOModel> { _model });
+            _todoService.Setup(x => x.GetAll()).Returns(new ObservableCollection<TODOModel> { _model });
             var newTitle = "New title";
             _editVM.Title.Value = newTitle;
             // Act
@@ -67,7 +68,7 @@ namespace ViewModels
         public void Completed_ItemWillRemoveAfterSave_True()
         {
             // Arrange
-            _todoService.Setup(x => x.GetAll()).Returns(new List<TODOModel> { _model });
+            _todoService.Setup(x => x.GetAll()).Returns(new ObservableCollection<TODOModel> { _model });
             // Act
             _editVM.Completed.Value = true;
             _editVM.SaveChangesCommand.Execute();
