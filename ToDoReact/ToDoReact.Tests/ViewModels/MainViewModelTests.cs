@@ -3,7 +3,6 @@ using NUnit.Framework;
 using Moq;
 using ToDoReact.Services;
 using ToDoReact.Models;
-using System.Collections.Generic;
 using FreshMvvm;
 using ViewModels;
 using System.Collections.ObjectModel;
@@ -107,6 +106,25 @@ namespace ToDoReact.Tests
             _mainViewModel.EditTODOCommand.Execute();
             // Assert
             _coreMethods.Verify(x => x.PushPageModel<EditTODOViewModel>(fakeModel, false, true), Times.Once());
+        }
+
+        [Test]
+        public void ItemsAreEmpty_AfterPageCreation_IsTrue()
+        {
+            // Arrange
+            // Act
+            // Assert
+            Assert.IsTrue(_mainViewModel.ItemsAreEmpty.Value);
+        }
+
+        [Test]
+        public void ItemsAreEmpty_AfterItemAdd_IsFalse()
+        {
+            // Arrange
+            ArrangeTestWithNotEmptyList();
+            // Act
+            // Assert
+            Assert.IsFalse(_mainViewModel.ItemsAreEmpty.Value);
         }
     }
 }
