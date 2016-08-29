@@ -19,7 +19,10 @@ namespace ViewModels
             _commandCanExecute = Title.Select((arg) => !string.IsNullOrEmpty(arg));
             AddItemCommand = new ReactiveCommand(_commandCanExecute);
             AddItemCommand.Subscribe((_) =>
-                                     _todoService.Add(new TODOModel(CreationDate, Title.Value, Description.Value)));
+            {
+                _todoService.Add(new TODOModel(CreationDate, Title.Value, Description.Value));
+                CoreMethods.PushPageModel<MainViewModel>();
+            });
         }
 
         public DateTime CreationDate

@@ -30,6 +30,7 @@ namespace ViewModels
                     _model.Description = Description.Value;
                     _model.Title = Title.Value;
                 }
+                CoreMethods.PushPageModel<MainViewModel>();
             });
 
             _deleteCommandSubscription = DeleteItemCommand.Subscribe(async (_) =>

@@ -3,9 +3,10 @@ using NUnit.Framework;
 using Moq;
 using ToDoReact.Services;
 using ToDoReact.Models;
-using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
+using FreshMvvm;
+using ToDoReact;
 
 namespace ViewModels
 {
@@ -23,6 +24,7 @@ namespace ViewModels
         private AddTODOViewModel _addTodoViewModel;
         private Mock<ITODOService> _mockTodoService;
         private Mock<ITimeProvider> _mockTimeProvider;
+        private Mock<IPageModelCoreMethods> _coreMethods;
 
         [Test]
         public void CreationDate_ReturnCurrentDate_SameAsDateTimeNow()
@@ -41,6 +43,7 @@ namespace ViewModels
         public void AddItemCommand_EnteredDataSaveToStorage_ItemSaved()
         {
             // Arrange
+            InitializeCoreMethods();
             // Act
             _addTodoViewModel.AddItemCommand.Execute();
             // Assert
@@ -61,7 +64,7 @@ namespace ViewModels
 
             _addTodoViewModel.Title.Value = title;
             _addTodoViewModel.Description.Value = description;
-
+            InitializeCoreMethods();
             // Act
             _addTodoViewModel.AddItemCommand.Execute();
             var res = _mockTodoService.Object.GetAll();
@@ -81,7 +84,7 @@ namespace ViewModels
             _mockTodoService.Setup(x => x.GetAll()).Returns(new ObservableCollection<TODOModel>() { model });
 
             _addTodoViewModel.Title.Value = title;
-
+            InitializeCoreMethods();
             // Act
             _addTodoViewModel.AddItemCommand.Execute();
             var res = _mockTodoService.Object.GetAll();
@@ -108,7 +111,24 @@ namespace ViewModels
             Assert.IsTrue(_addTodoViewModel.AddItemCommand.CanExecute());
         }
 
+        [Test]
+        public void AddItemCommand_RedirectToMainPageAfterSave_True()
+        {
+            // Arrange
+            _addTodoViewModel.Title.Value = "Sample";
+            InitializeCoreMethods();
 
+            // Act
+            _addTodoViewModel.AddItemCommand.Execute();
+            // Assert
+            _coreMethods.Verify(x => x.PushPageModel<MainViewModel>(true), Times.Once);
+        }
+
+        private void InitializeCoreMethods()
+        {
+            _coreMethods = new Mock<IPageModelCoreMethods>();
+            _addTodoViewModel.CoreMethods = _coreMethods.Object;
+        }
     }
 }
 
