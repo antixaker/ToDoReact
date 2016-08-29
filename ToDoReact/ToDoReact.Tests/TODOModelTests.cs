@@ -23,20 +23,6 @@ namespace ToDoReact.Tests
         }
 
         [Test]
-        public void TODOModel_CanCreateItemWithoutDescription_Success()
-        {
-            // Arrange
-            var date = DateTime.Now;
-            var title = "StudyTDD";
-            // Act
-            var item = new TODOModel(date, title);
-            // Assert
-            Assert.AreEqual(date, item.Date);
-            Assert.AreEqual(title, item.Title);
-            Assert.AreEqual("Empty", item.Description);
-        }
-
-        [Test]
         public void TODOModel_LeftDecsriptionEmpty_ItemHasDefaultDescription()
         {
             // Arrange

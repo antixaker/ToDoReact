@@ -78,8 +78,9 @@ namespace ViewModels
             // Arrange
             var title = "Sample title";
             var date = new DateTime(2016, 1, 1);
+            var description = string.Empty;
 
-            var model = new TODOModel(date, title);
+            var model = new TODOModel(date, title, description);
             _mockTimeProvider.Setup(t => t.CurrentTime).Returns(date);
             _mockTodoService.Setup(x => x.GetAll()).Returns(new ObservableCollection<TODOModel>() { model });
 

@@ -20,7 +20,8 @@ namespace ViewModels
         {
             var date = new DateTime(2016, 1, 1);
             var title = "Title";
-            _model = new TODOModel(date, title);
+            var description = string.Empty;
+            _model = new TODOModel(date, title, description);
             _todoService = new Mock<ITODOService>();
 
             _editVM = new EditTODOViewModel(_todoService.Object);
