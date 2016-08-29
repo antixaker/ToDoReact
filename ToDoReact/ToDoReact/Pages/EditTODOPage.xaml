@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pages.EditTODOPage">
+<pages:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Pages.EditTODOPage" xmlns:pages="clr-namespace:Pages;assembly=ToDoReact">
 	<StackLayout Orientation="Vertical" Padding="5">
 		<Label Text="Is TODO completed?" />
 		<Switch IsToggled="{Binding IsCompleted.Value}" />
@@ -13,4 +13,4 @@
 		<Button Command="{Binding SaveChangesCommand}" Text="Save changes" TextColor="Navy" BackgroundColor="Silver" />
 		<Button Command="{Binding DeleteItemCommand}" Text="Delete item" TextColor="Black" BackgroundColor="Red" />
 	</StackLayout>
-</ContentPage>
+</pages:BaseContentPage>
