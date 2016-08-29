@@ -1,11 +1,9 @@
 ﻿using System;
 using ToDoReact.Services;
-using System.Collections.Generic;
 using ToDoReact.Models;
 using Reactive.Bindings;
 using System.Reactive.Linq;
 using System.Linq;
-using FreshMvvm;
 using ViewModels;
 using System.Collections.ObjectModel;
 
