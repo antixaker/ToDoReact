@@ -39,6 +39,7 @@ namespace ViewModels
                 if (areYouSure)
                 {
                     todoService.DeleteItem(_model);
+                    await CoreMethods.PushPageModel<MainViewModel>(true);
                 }
             });
 

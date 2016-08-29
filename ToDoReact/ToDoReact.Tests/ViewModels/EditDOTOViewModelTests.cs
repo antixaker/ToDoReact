@@ -106,6 +106,20 @@ namespace ViewModels
         }
 
         [Test]
+        public void DeleteItemCommand_AcceptDeletion_RedirectToMainPage()
+        {
+            // Arrange
+            _coreMethods = new Mock<IPageModelCoreMethods>();
+            _coreMethods.Setup(x => x.DisplayAlert(string.Empty, "Are you sure?", "Yes", "No")).Returns(Task.FromResult(true));
+            _editVM.CoreMethods = _coreMethods.Object;
+
+            // Act
+            _editVM.DeleteItemCommand.Execute();
+            // Assert
+            _coreMethods.Verify(x => x.PushPageModel<MainViewModel>(true), Times.Once);
+        }
+
+        [Test]
         public void DeleteItemCommand_DeclineDeletion_ItemNotDeleted()
         {
             // Arrange
