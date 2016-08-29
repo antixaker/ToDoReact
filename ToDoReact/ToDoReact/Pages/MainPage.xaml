@@ -10,7 +10,7 @@
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<ViewCell>
-						<Grid Padding="3,0,0,3">
+						<Grid Padding="10,0,0,15">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />
@@ -19,9 +19,9 @@
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="*" />
 							</Grid.ColumnDefinitions>
-							<Label Grid.Row="0" Grid.Column="0" Text="{Binding Title}" />
+							<Label Grid.Row="0" Grid.Column="0" Text="{Binding Title}" TextColor="Navy" />
 							<Label Grid.Row="0" Grid.Column="1" Text="{Binding Date}" />
-							<Label Grid.Row="1" Grid.Column="0" Text="{Binding Description}" />
+							<Label Grid.Row="1" Grid.Column="0" Text="{Binding Description}" FontSize="12" TextColor="Gray" />
 						</Grid>
 					</ViewCell>
 				</DataTemplate>
