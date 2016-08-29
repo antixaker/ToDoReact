@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="ToDoReact.MainPage" xmlns:pages="clr-namespace:Pages;assembly=ToDoReact" xmlns:behaviors="clr-namespace:ToDoReact.Behaviors;assembly=ToDoReact">
+	<StackLayout Orientation="Vertical">
+		<Button Text="+" FontSize="20" Command="{Binding AddTODOCommand}" />
+		<Label Text="TODO list is empty" IsVisible="{Binding ItemsAreEmpty.Value}" HorizontalOptions="Center" />
+		<ListView ItemsSource="{Binding Items.Value}">
+			<ListView.Behaviors>
+				<behaviors:ListViewItemTappedBehavior BehaviorCommand="{Binding EditTODOCommand}" />
+			</ListView.Behaviors>
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<Grid Padding="3,0,0,3">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Label Grid.Row="0" Grid.Column="0" Text="{Binding Title}" />
+							<Label Grid.Row="0" Grid.Column="1" Text="{Binding Date}" />
+							<Label Grid.Row="1" Grid.Column="0" Text="{Binding Description}" />
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</StackLayout>
+</pages:BaseContentPage>
