@@ -21,7 +21,7 @@ namespace ViewModels
 
             _saveCommandSubscription = SaveChangesCommand.Subscribe((_) =>
             {
-                if (Completed.Value)
+                if (IsCompleted.Value)
                 {
                     todoService.DeleteItem(_model);
                 }
@@ -59,7 +59,7 @@ namespace ViewModels
             Description.Value = model.Description;
         }
 
-        public ReactiveProperty<bool> Completed { get; } = new ReactiveProperty<bool>();
+        public ReactiveProperty<bool> IsCompleted { get; } = new ReactiveProperty<bool>();
 
         public ReactiveProperty<DateTime> CreationDate { get; } = new ReactiveProperty<DateTime>();
 

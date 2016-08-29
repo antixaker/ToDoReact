@@ -73,7 +73,7 @@ namespace ViewModels
             // Arrange
             InitializeCoreMethods();
             // Act
-            _editVM.Completed.Value = true;
+            _editVM.IsCompleted.Value = true;
             _editVM.SaveChangesCommand.Execute();
             // Assert
             _todoService.Verify(x => x.DeleteItem(_model), Times.Once());
