@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Pages;
+
 using Xamarin.Forms;
 
-namespace ToDoReact
+namespace Pages
 {
-    public partial class MainPage : BaseContentPage
+    public partial class EditTODOPage : ContentPage
     {
-        public MainPage()
+        public EditTODOPage()
         {
             InitializeComponent();
         }
