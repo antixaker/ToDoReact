@@ -10,68 +10,71 @@ namespace ToDoReact.Tests
     [TestFixture]
     public class TODOServiceTests
     {
-        [SetUp]
-        public void SetUp()
-        {
-            _todoService = new TODOService();
-        }
-
-        private ITODOService _todoService;
-
-        private TODOModel GetTODOInstance()
-        {
-            return new TODOModel(DateTime.Now, string.Empty, string.Empty);
-        }
-
         [Test]
         public void GetAll_GotEmptyList_Success()
         {
             // Arrange
+            var todoService = CreateToDoService();
+            var emptyList = new List<TODOModel>();
+
             // Act
-            var todosList = _todoService.GetAll();
+            var todosList = todoService.GetAll();
+
             // Assert
-            Assert.AreEqual(new List<TODOModel>(), todosList);
+            Assert.AreEqual(emptyList, todosList);
         }
 
         [Test]
         public void Add_AddTODOItem_ListContainsAddedItem()
         {
             // Arrange
-            var todoItem = GetTODOInstance();
+            var todoService = CreateToDoService();
+            var todoItem = CreateToDoItem();
+
             // Act
-            _todoService.Add(todoItem);
+            todoService.Add(todoItem);
+
             // Assert
-            Assert.IsTrue(_todoService.GetAll().Contains(todoItem));
+            Assert.IsTrue(todoService.GetAll().Contains(todoItem));
         }
 
         [Test]
         public void DeleteItem_DeleteExistTODOFromList_ListDoesntContainItem()
         {
             // Arrange
-            var todoItem = GetTODOInstance();
-            _todoService.Add(todoItem);
+            var todoService = CreateToDoService();
+            var todoItem = CreateToDoItem();
+            todoService.Add(todoItem);
+
             // Act
-            _todoService.DeleteItem(todoItem);
+            todoService.DeleteItem(todoItem);
+
             // Assert
-            Assert.IsFalse(_todoService.GetAll().Contains(todoItem));
+            Assert.IsFalse(todoService.GetAll().Contains(todoItem));
         }
 
         [Test]
         public void DeleteItem_TryDeleteNotExistItem_NoException()
         {
             // Arrange
-            var item = GetTODOInstance();
+            var todoService = CreateToDoService();
+            var item = CreateToDoItem();
+
             // Act
-            try
-            {
-                _todoService.DeleteItem(item);
-            }
+            todoService.DeleteItem(item);
+
             // Assert
-            catch (Exception)
-            {
-                Assert.IsTrue(false);
-            }
             Assert.IsTrue(true);
+        }
+
+        private TODOModel CreateToDoItem()
+        {
+            return new TODOModel(DateTime.MinValue, string.Empty, string.Empty);
+        }
+
+        private ITODOService CreateToDoService()
+        {
+            return new TODOService();
         }
     }
 }
