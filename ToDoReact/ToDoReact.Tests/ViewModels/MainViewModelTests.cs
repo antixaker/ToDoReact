@@ -38,17 +38,12 @@ namespace ToDoReact.Tests
             return collection;
         }
 
-        private void SetMockedCoreMethodsToViewModel()
-        {
-            _coreMethods = new Mock<IPageModelCoreMethods>();
-            _mainViewModel.CoreMethods = _coreMethods.Object;
-        }
-
         [Test]
         public void MainViewModel_HaveNotNullListAfterCreation_True()
         {
             // Arrange
             ArrangeTestWithEmptyList();
+
             // Act
             // Assert
             Assert.IsNotNull(_mainViewModel.Items);
@@ -66,32 +61,15 @@ namespace ToDoReact.Tests
         }
 
         [Test]
-        public void ItemsAreEmpty_ItemsCountZero_PropertySetTrue()
-        {
-            // Arrange
-            ArrangeTestWithEmptyList();
-            // Act
-            // Assert
-            Assert.IsTrue(_mainViewModel.ItemsAreEmpty.Value);
-        }
-
-        [Test]
-        public void ItemsAreEmpty_PropertyFalseAfterAddingToList_True()
-        {
-            // Arrange
-            ArrangeTestWithNotEmptyList();
-            // Act
-            // Assert
-            Assert.IsFalse(_mainViewModel.ItemsAreEmpty.Value);
-        }
-
-        [Test]
         public void AddTODOCommand_RedirectToTargetView_Success()
         {
             // Arrange
-            SetMockedCoreMethodsToViewModel();
+            _coreMethods = new Mock<IPageModelCoreMethods>();
+            _mainViewModel.CoreMethods = _coreMethods.Object;
+
             // Act
             _mainViewModel.AddTODOCommand.Execute();
+
             // Assert
             _coreMethods.Verify(x => x.PushPageModel<AddTODOViewModel>(true), Times.Once());
         }
@@ -100,10 +78,13 @@ namespace ToDoReact.Tests
         public void EditTODOCommand_RedirectToTargetView_Success()
         {
             // Arrange
-            SetMockedCoreMethodsToViewModel();
+            _coreMethods = new Mock<IPageModelCoreMethods>();
+            _mainViewModel.CoreMethods = _coreMethods.Object;
             var fakeModel = It.IsAny<TODOModel>();
+
             // Act
             _mainViewModel.EditTODOCommand.Execute();
+
             // Assert
             _coreMethods.Verify(x => x.PushPageModel<EditTODOViewModel>(fakeModel, false, true), Times.Once());
         }
@@ -112,6 +93,8 @@ namespace ToDoReact.Tests
         public void ItemsAreEmpty_AfterPageCreation_IsTrue()
         {
             // Arrange
+            ArrangeTestWithEmptyList();
+
             // Act
             // Assert
             Assert.IsTrue(_mainViewModel.ItemsAreEmpty.Value);
@@ -122,6 +105,7 @@ namespace ToDoReact.Tests
         {
             // Arrange
             ArrangeTestWithNotEmptyList();
+
             // Act
             // Assert
             Assert.IsFalse(_mainViewModel.ItemsAreEmpty.Value);

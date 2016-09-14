@@ -1,12 +1,10 @@
 ﻿using System;
-using NUnit.Framework;
-using Moq;
-using ToDoReact.Services;
-using ToDoReact.Models;
-using System.Linq;
-using System.Collections.ObjectModel;
 using FreshMvvm;
+using Moq;
+using NUnit.Framework;
 using ToDoReact;
+using ToDoReact.Models;
+using ToDoReact.Services;
 
 namespace ViewModels
 {
