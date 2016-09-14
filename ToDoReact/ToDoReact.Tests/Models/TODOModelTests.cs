@@ -8,14 +8,16 @@ namespace ToDoReact.Tests
     public class TODOModelTests
     {
         [Test]
-        public void TODOModel_ItemContainsDateTitleDescription_True()
+        public void TODOModel_SetValuesInCtor_SameValuesInProperties()
         {
             // Arrange
-            var date = DateTime.Now;
+            var date = DateTime.MinValue;
             var title = "StudyTDD";
             var description = "TDD is very interesting and usefull thing.";
+
             // Act
             var item = new TODOModel(date, title, description);
+
             // Assert
             Assert.AreEqual(date, item.Date);
             Assert.AreEqual(title, item.Title);
@@ -23,35 +25,23 @@ namespace ToDoReact.Tests
         }
 
         [Test]
-        public void TODOModel_LeftDecsriptionEmpty_ItemHasDefaultDescription()
+        [TestCase("")]
+        [TestCase("  ")]
+        public void TODOModel_SetDecsriptionEmptyOrWhiteSpace_ItemHasDefaultDescription(string description)
         {
             // Arrange
-            var date = DateTime.Now;
+            var date = DateTime.MinValue;
             var title = "StudyTDD";
-            var description = string.Empty;
+            var descriptionDefaultValue = "Empty";
+
             // Act
             var item = new TODOModel(date, title, description);
+
             // Assert
             Assert.AreEqual(date, item.Date);
             Assert.AreEqual(title, item.Title);
-            Assert.AreEqual("Empty", item.Description);
+            Assert.AreEqual(descriptionDefaultValue, item.Description);
         }
-
-        [Test]
-        public void TODOModel_AddToDescriptionWhiteSpaces_ItemHasDefaultDescription()
-        {
-            // Arrange
-            var date = DateTime.Now;
-            var title = "StudyTDD";
-            var description = "  ";
-            // Act
-            var item = new TODOModel(date, title, description);
-            // Assert
-            Assert.AreEqual(date, item.Date);
-            Assert.AreEqual(title, item.Title);
-            Assert.AreEqual("Empty", item.Description);
-        }
-
     }
 }
 
